@@ -1,0 +1,13 @@
+png (file = 'plot4.png')
+par(mfrow = c(2,2))
+with (power, {
+  plot (Datetime, Global_active_power, type = 'l', xlab = '', ylab = 'Global Active Power', lwd = 2 )
+  plot (Datetime, Voltage, type = 'l', xlab = 'datetime', ylab = 'Voltage')
+  plot (Datetime, Sub_metering_1,  type = 'n', xlab = '', ylab = 'Energy sub metering')
+  lines(Datetime, Sub_metering_1, type = 'l', lwd = 2)
+  lines(Datetime, Sub_metering_2, type = 'l', col = 'red', lwd = 2)
+  lines(Datetime, Sub_metering_3, type = 'l', col = 'blue', lwd = 2)
+  legend('topright', bty = 'n', cex = 0.75, col = c('black', 'red', 'blue'), lty = 1, lwd = 2, legend = c('Sub_metering_1', 'Sub_metering_2', 'Sub_metering_3'))
+  plot (Datetime, Global_reactive_power, type = 'l', xlab = 'datetime')
+})
+dev.off()
