@@ -1,4 +1,19 @@
-png (file = 'plot4.png')
+# install and load packages
+install.packages('sqldf')
+install.packages('lubridate')
+
+library(sqldf)
+library(lubridate)
+
+# load patial data meet the requirement
+power <- read.csv.sql('./data/household_power_consumption.txt', sep = ';', header = TRUE, sql = "select * from file where Date in ('1/2/2007', '2/2/2007')")
+closeAllConnections()
+
+# generate a new column with datetime
+power$Datetime <- dmy_hms(paste(power$Date, power$Time))
+
+# generate plot 4
+png (file = 'plot4.png', width = 480, height = 480)
 par(mfrow = c(2,2))
 with (power, {
   plot (Datetime, Global_active_power, type = 'l', xlab = '', ylab = 'Global Active Power', lwd = 2 )
